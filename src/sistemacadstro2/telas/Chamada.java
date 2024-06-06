@@ -17,7 +17,7 @@ import sistemacadstro2.services.Servico;
  */
 public class Chamada extends javax.swing.JFrame {
 
-    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd,MM,yyyy");
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDate hoje = LocalDate.now();
     ArrayList<Aluno> lista;
     Servico service;
@@ -30,10 +30,13 @@ public class Chamada extends javax.swing.JFrame {
         this.lista = lista;
         this.service = service;
         for (Aluno object : lista) {
-            String[] msg = {object.getName()};
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            model.addRow(msg);
+            if (object.getAtivo()) {
+                String[] msg = {object.getName()};
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(msg);
+            }
         }
+        today.setText(hoje.format(fmt));
     }
 
     public Chamada() {
@@ -52,6 +55,8 @@ public class Chamada extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        today = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,6 +93,10 @@ public class Chamada extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Lista de presença");
+
+        today.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,14 +109,24 @@ public class Chamada extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(today)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(today))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -120,23 +139,23 @@ public class Chamada extends javax.swing.JFrame {
         Integer linhas = model.getRowCount();
         Boolean[] presencas = new Boolean[linhas];
         for (int i = 0; i < linhas; i++) {
-            if(model.getValueAt(i, 1) == null){
+            if (model.getValueAt(i, 1) == null) {
                 presencas[i] = false;
-            }else{
+            } else {
                 presencas[i] = true;
             }
         }
-        
+
         for (int i = 0; i < lista.size(); i++) {
-            if(presencas[i]){
+            if (presencas[i]) {
                 lista.get(i).getPresenças().add(hoje);
-            }else{
+            } else {
                 lista.get(i).setFaltas(lista.get(i).getFaltas() + 1);
             }
         }
-        
+
         service.atualizarLista(lista);
-        
+
         this.setVisible(false);
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -178,7 +197,9 @@ public class Chamada extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel today;
     // End of variables declaration//GEN-END:variables
 }

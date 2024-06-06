@@ -6,7 +6,6 @@ package sistemacadstro2.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.Objects;
  *
  * @author lucas
  */
-public class Aluno implements Serializable,Comparable<Aluno> {
+public class Aluno implements Serializable, Comparable<Aluno> {
 
     private String name;
     private Integer id;
@@ -24,17 +23,50 @@ public class Aluno implements Serializable,Comparable<Aluno> {
     private Double peso;
     private Integer faltas = 0;
     private LocalDate aniversario;
-    private List<LocalDate> presenças = new ArrayList<>();
+    private List<LocalDate> presencas = new ArrayList<>();
+    private String nome_responsavel;
+    private String email;
+    private String endereco;
+    private String bairro;
+    private String cep;
+    private String escola;
+    private String tamanho_roupa;
+    private String tamanho_calcado;
+    private String categoria;
+    private String faixa;
+    private Integer grau;
+    private String medicamento_cotinuo;
+    private String observacao;
+    private Boolean autorizacao_treino;
+    private Boolean autorizacao_competicao;
+    private Boolean autorizacao_imagem;
+    private Boolean ativo = true;
 
     public Aluno() {
     }
 
-    public Aluno(String name, Integer id, String num_contato, Double peso, LocalDate aniversario) {
+    public Aluno(String name, Integer id, String num_contato, Double peso, LocalDate aniversario, String nome_responsavel, String email, String endereco, String bairro, String cep, String escola, String tamanho_roupa, String tamanho_calcado, String categoria, String faixa, Integer grau, String medicamento_cotinuo, String observacao, Boolean autorizacao_treino, Boolean autorizacao_competicao, Boolean autorizacao_imagem) {
         this.name = name;
         this.id = id;
         this.num_contato = num_contato;
         this.peso = peso;
         this.aniversario = aniversario;
+        this.nome_responsavel = nome_responsavel;
+        this.email = email;
+        this.endereco = endereco;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.escola = escola;
+        this.tamanho_roupa = tamanho_roupa;
+        this.tamanho_calcado = tamanho_calcado;
+        this.categoria = categoria;
+        this.faixa = faixa;
+        this.grau = grau;
+        this.medicamento_cotinuo = medicamento_cotinuo;
+        this.observacao = observacao;
+        this.autorizacao_treino = autorizacao_treino;
+        this.autorizacao_competicao = autorizacao_competicao;
+        this.autorizacao_imagem = autorizacao_imagem;
     }
 
     public String getName() {
@@ -86,9 +118,145 @@ public class Aluno implements Serializable,Comparable<Aluno> {
     }
 
     public List<LocalDate> getPresenças() {
-        return presenças;
+        return presencas;
     }
 
+    public String getNome_responsavel() {
+        return nome_responsavel;
+    }
+
+    public void setNome_responsavel(String nome_responsavel) {
+        this.nome_responsavel = nome_responsavel;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getEscola() {
+        return escola;
+    }
+
+    public void setEscola(String escola) {
+        this.escola = escola;
+    }
+
+    public String getTamanho_roupa() {
+        return tamanho_roupa;
+    }
+
+    public void setTamanho_roupa(String tamanho_roupa) {
+        this.tamanho_roupa = tamanho_roupa;
+    }
+
+    public String getTamanho_calcado() {
+        return tamanho_calcado;
+    }
+
+    public void setTamanho_calcado(String tamanho_calcado) {
+        this.tamanho_calcado = tamanho_calcado;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getFaixa() {
+        return faixa;
+    }
+
+    public void setFaixa(String faixa) {
+        this.faixa = faixa;
+    }
+
+    public Integer getGrau() {
+        return grau;
+    }
+
+    public void setGrau(Integer grau) {
+        this.grau = grau;
+    }
+
+    public String getMedicamento_cotinuo() {
+        return medicamento_cotinuo;
+    }
+
+    public void setMedicamento_cotinuo(String medicamento_cotinuo) {
+        this.medicamento_cotinuo = medicamento_cotinuo;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    public Boolean getAutorizacao_treino() {
+        return autorizacao_treino;
+    }
+
+    public void setAutorizacao_treino(Boolean autorizacao_treino) {
+        this.autorizacao_treino = autorizacao_treino;
+    }
+
+    public Boolean getAutorizacao_competicao() {
+        return autorizacao_competicao;
+    }
+
+    public void setAutorizacao_competicao(Boolean autorizacao_competicao) {
+        this.autorizacao_competicao = autorizacao_competicao;
+    }
+
+    public Boolean getAutorizacao_imagem() {
+        return autorizacao_imagem;
+    }
+
+    public void setAutorizacao_imagem(Boolean autorizacao_imagem) {
+        this.autorizacao_imagem = autorizacao_imagem;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -113,7 +281,7 @@ public class Aluno implements Serializable,Comparable<Aluno> {
 
     @Override
     public String toString() {
-        return ""+ id + " - "+ name;
+        return "" + id + " - " + name;
     }
 
     public Integer getIdade() {
@@ -133,7 +301,7 @@ public class Aluno implements Serializable,Comparable<Aluno> {
 
     @Override
     public int compareTo(Aluno o) {
-        return this.getName().compareTo(o.getName());
+        return this.getName().compareToIgnoreCase(o.getName());
     }
 
 }
