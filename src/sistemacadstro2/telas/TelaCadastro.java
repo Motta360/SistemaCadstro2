@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import sistemacadstro2.entities.Aluno;
 import sistemacadstro2.services.Servico;
 
@@ -17,20 +18,32 @@ import sistemacadstro2.services.Servico;
  * @author lucas
  */
 public class TelaCadastro extends javax.swing.JFrame {
+
     Servico service;
     ArrayList lista;
-    
+
     /**
      * Creates new form TelaCadastro
      */
     public TelaCadastro(Servico service) {
         initComponents();
         this.service = service;
+        textGrau.setText("0");
     }
 
     private TelaCadastro() {
-        
+
     }
+
+    public String verificarTextoVazio(String string) {
+        if (string.equals("")) {
+            return " ";
+        } else {
+            return string;
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -188,7 +201,9 @@ public class TelaCadastro extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(textEndereco)
-                                    .addComponent(textBairro)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(142, 142, 142)
+                                        .addComponent(textBairro))
                                     .addComponent(textCep))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -227,36 +242,35 @@ public class TelaCadastro extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(textCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                                .addComponent(textFaixa)
+                                .addComponent(textGrau))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(18, 18, 18)
+                                .addComponent(textObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addGap(27, 27, 27)
+                                .addComponent(checkTreinar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel20)
-                                    .addComponent(jLabel16))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                                    .addComponent(textFaixa)
-                                    .addComponent(textGrau))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel24))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel18)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(textObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel19)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(checkTreinar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel25)
-                                            .addComponent(jLabel24))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(checkCompetir)
-                                            .addComponent(checkImagem))))))
+                                    .addComponent(checkCompetir)
+                                    .addComponent(checkImagem))))
                         .addContainerGap(31, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -344,8 +358,10 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel25)
                     .addComponent(checkImagem)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(8, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -356,19 +372,24 @@ public class TelaCadastro extends javax.swing.JFrame {
         lista = service.read();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Integer id;
-        if(lista.size() == 0){
+        if (lista.size() == 0) {
             id = 1;
-        }else{
+        } else {
             Aluno referencia = (Aluno) lista.getLast();
             id = referencia.getId() + 1;
         }
-        Aluno a1 = new Aluno(textName.getText(),id , textTelefone.getText(), Double.parseDouble(textPeso.getText()), LocalDate.parse(textData.getText(), fmt), textResponsavel.getText(), textEmail.getText(), textEndereco.getText(), textBairro.getText(), textCep.getText(), textEscola.getText(), textRoupa.getText(), textCalcado.getText(), textCategoria.getText(), textFaixa.getText(), Integer.parseInt(textGrau.getText()), textMedicamento.getText(), textObservacao.getText(), checkTreinar.isSelected(), checkCompetir.isSelected(), checkImagem.isSelected());
-        lista.add(a1);
-        textName.setText("");
-        textTelefone.setText("");
-        textPeso.setText("");
-        textData.setText("");
-        service.atualizarLista(lista);
+        if (textName.getText().equals("") || textData.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite um Nome e uma data de Nascimento: ");
+        } else {
+
+            Aluno a1 = new Aluno(textName.getText(), id, verificarTextoVazio(textTelefone.getText()), Double.parseDouble(verificarTextoVazio(textPeso.getText())), LocalDate.parse(textData.getText(), fmt), verificarTextoVazio(textResponsavel.getText()), verificarTextoVazio(textEmail.getText()), verificarTextoVazio(textEndereco.getText()), verificarTextoVazio(textBairro.getText()), verificarTextoVazio(textCep.getText()), verificarTextoVazio(textEscola.getText()), verificarTextoVazio(textRoupa.getText()), verificarTextoVazio(textCalcado.getText()), verificarTextoVazio(textCategoria.getText()), verificarTextoVazio(textFaixa.getText()), Integer.parseInt(textGrau.getText()), verificarTextoVazio(textMedicamento.getText()), verificarTextoVazio(textObservacao.getText()), checkTreinar.isSelected(), checkCompetir.isSelected(), checkImagem.isSelected());
+            lista.add(a1);
+            textName.setText("");
+            textTelefone.setText("");
+            textPeso.setText("");
+            textData.setText("");
+            service.atualizarLista(lista);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

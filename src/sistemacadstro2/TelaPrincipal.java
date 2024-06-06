@@ -4,7 +4,10 @@
  */
 package sistemacadstro2;
 
-import java.awt.TextArea;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.time.format.DateTimeFormatter;
 import sistemacadstro2.services.Servico;
 import sistemacadstro2.entities.Aluno;
 import java.util.ArrayList;
@@ -13,9 +16,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 import sistemacadstro2.telas.Chamada;
 import sistemacadstro2.telas.DetalhesAluno;
+import sistemacadstro2.telas.DiaEspecífico;
 import sistemacadstro2.telas.TelaCadastro;
 
 /**
@@ -24,9 +27,19 @@ import sistemacadstro2.telas.TelaCadastro;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     Servico service = new Servico();
     ArrayList<Aluno> lista = service.read();
     boolean ordemAlfabetica = false;
+
+    public String verificarPermissao(boolean x) {
+        if (x) {
+            return "Sim";
+        } else {
+            return "Não";
+        }
+    }
+
     public class MyTask extends TimerTask {
 
         @Override
@@ -78,6 +91,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         idDelete = new javax.swing.JTextField();
         ordem = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema");
@@ -122,23 +137,42 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setText("Chamada dia Específico");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Trasformar Em Excel");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(idDelete, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(idDelete, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton6)
+                        .addGap(21, 21, 21)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
-                            .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(textId, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
@@ -147,17 +181,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jButton4)
                                 .addComponent(jButton1)))
-                        .addContainerGap(14, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
+                        .addGap(98, 98, 98)
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
+                        .addGap(62, 62, 62)
+                        .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -166,7 +202,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton3)
-                            .addComponent(ordem))
+                            .addComponent(ordem)
+                            .addComponent(jButton6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(idDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -187,7 +224,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lista = service.read();
         Aluno a2 = null;
         for (Aluno aluno : lista) {
-            System.out.println(aluno.getId());
             if (aluno.getId() == Integer.parseInt(textId.getText())) {
                 a2 = aluno;
             }
@@ -217,10 +253,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void ordemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ordemActionPerformed
-        if(!ordemAlfabetica){
+        if (!ordemAlfabetica) {
             ordemAlfabetica = true;
             ordem.setText("Ordem de Registro");
-        }else{
+        } else {
             ordemAlfabetica = false;
             ordem.setText("Ordem Alfabetica");
         }
@@ -230,6 +266,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Chamada ch = new Chamada(lista, service);
         ch.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        DiaEspecífico de = new DiaEspecífico(lista, service);
+        de.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        File path = new File("Formatado.csv");
+        lista = service.read();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+            bw.write("Nome;Data de Nascimento;Idade;Nome dp Responsavel;Telefone;Email;Endereço;Bairro;Cep;Escola;Tamanho Roupa;Tamanho Calçado;Categoria;Faixa;Grau;Peso;Medicamento Continuo;Observação;Autorização Treino;Autorização Competição;Autorização de Imagem");
+            bw.newLine();
+            for (Aluno aluno : lista) {
+                bw.write(aluno.getName() + ";" + aluno.getAniversario().format(fmt) + ";" + aluno.getIdade() + ";" + aluno.getNome_responsavel() + ";" + aluno.getNum_contato() + ";" + aluno.getEmail() + ";" + aluno.getEndereco() + ";" + aluno.getBairro() + ";" + aluno.getCep() + ";" + aluno.getEscola() + ";" + aluno.getTamanho_roupa() + ";" + aluno.getTamanho_calcado() + ";" + aluno.getCategoria() + ";" + aluno.getFaixa() + ";" + aluno.getGrau() + ";" + aluno.getPeso() + ";" + aluno.getMedicamento_cotinuo()+";"+aluno.getObservacao()+";"+verificarPermissao(aluno.getAutorizacao_treino())+";"+verificarPermissao(aluno.getAutorizacao_competicao())+";"+verificarPermissao(aluno.getAutorizacao_imagem()));
+                bw.newLine();
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +328,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton ordem;
     private javax.swing.JTextField textId;
