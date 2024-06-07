@@ -5,11 +5,15 @@
 package sistemacadstro2.telas;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -40,12 +44,47 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
     }
 
     public boolean verificaAutorizacao(String stg) {
-        if (stg.equalsIgnoreCase("sim")) {
+        if (stg.equalsIgnoreCase("sim") || stg.equalsIgnoreCase("ok")) {
             return true;
         } else {
             return false;
         }
     }
+
+    public String verificarTextoVazio(String string) {
+        if (string == null || string.isEmpty()) {
+            return ""; // Retorna uma string vazia se o campo estiver vazio ou nulo
+        } else {
+            return string.trim(); // Retorna o valor do campo, removendo espaços em branco extras no início e no final
+        }
+    }
+
+    public double verificarTextoVazioNum(String string) {
+        if (string == null || string.isEmpty()) {
+            return 0.0; // Retorna 0 se a string estiver vazia ou nula
+        } else {
+            try {
+                return Double.parseDouble(string); // Tenta converter a string em um número
+            } catch (NumberFormatException e) {
+                System.err.println("Erro ao converter para número: " + e.getMessage());
+                return 0.0; // Retorna 0 em caso de erro de conversão
+            }
+        }
+    }
+
+    public LocalDate verificarTextoVazioData(String string) {
+    if (string == null || string.isEmpty()) {
+        return LocalDate.of(2000, 1, 1); // Retorna uma data padrão se a string estiver vazia ou nula
+    } else {
+        try {
+            return LocalDate.parse(string, fmt); // Tenta converter a string em uma data
+        } catch (DateTimeParseException e) {
+            System.err.println("Erro ao analisar a data: " + e.getMessage());
+            return LocalDate.of(2000, 1, 1); // Retorna uma data padrão em caso de erro de análise
+        }
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -60,6 +99,8 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,6 +120,15 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
 
         jLabel1.setText("Adcione um arquivo no formato .csv com o padrão aceito:");
 
+        jButton3.setText("Gerar Template CSV");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Para adicionar alunos por um arquivo, preencha o template gerado pelo botão \"Gerar Template CSV\"");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,17 +136,22 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(textFile, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1))))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jButton2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton3))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(textFile, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(jLabel1)))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,8 +163,12 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
                     .addComponent(textFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,22 +197,36 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 lista = service.read();
                 String primeiralinha = br.readLine();
-                if (primeiralinha.equalsIgnoreCase("Nome;Data de Nascimento;Idade;Nome dp Responsavel;Telefone;Email;Endereço;Bairro;Cep;Escola;Tamanho Roupa;Tamanho Calçado;Categoria;Faixa;Grau;Peso;Medicamento Continuo;Observação;Autorização Treino;Autorização Competição;Autorização de Imagem")) {
-                    String[] aluno_novo = br.readLine().split(";");
-                    while (aluno_novo != null) {
-                        Aluno novo = new Aluno(aluno_novo[0], lista.getLast().getId() + 1, aluno_novo[4], Double.parseDouble(aluno_novo[15]), LocalDate.parse(aluno_novo[1], fmt), aluno_novo[3], aluno_novo[5], aluno_novo[6], aluno_novo[7], aluno_novo[8], aluno_novo[9], aluno_novo[10], aluno_novo[11], aluno_novo[12], aluno_novo[13], Integer.parseInt(aluno_novo[14]), aluno_novo[16], aluno_novo[17], verificaAutorizacao(aluno_novo[18]), verificaAutorizacao(aluno_novo[19]), verificaAutorizacao(aluno_novo[20]));
+                if (primeiralinha.equalsIgnoreCase("Nome,Data de Nascimento,Idade,Nome dp Responsavel,Telefone,Email,Endereço,Bairro,Cep,Escola,Tamanho Roupa,Tamanho Calçado,Categoria,Faixa,Grau,Peso,Medicamento Continuo,Observação,Autorização Treino,Autorização Competição,Autorização de Imagem")) {
+                    String alno = br.readLine();
+                    while (alno != null) {
+                        String[] aluno_novo = alno.split(",");
+                        Aluno novo = new Aluno(verificarTextoVazio(aluno_novo[0]), lista.getLast().getId() + 1, verificarTextoVazio(aluno_novo[4]), verificarTextoVazioNum(aluno_novo[15]), verificarTextoVazioData(aluno_novo[1]), verificarTextoVazio(aluno_novo[3]), verificarTextoVazio(aluno_novo[5]), verificarTextoVazio(aluno_novo[6]), verificarTextoVazio(aluno_novo[7]), verificarTextoVazio(aluno_novo[8]), verificarTextoVazio(aluno_novo[9]), verificarTextoVazio(aluno_novo[10]), verificarTextoVazio(aluno_novo[11]), verificarTextoVazio(aluno_novo[12]), verificarTextoVazio(aluno_novo[13]), (int) verificarTextoVazioNum(aluno_novo[14]), verificarTextoVazio(aluno_novo[16]), verificarTextoVazio(aluno_novo[17]), verificaAutorizacao(aluno_novo[18]), verificaAutorizacao(aluno_novo[19]), verificaAutorizacao(aluno_novo[20]));
                         lista.add(novo);
-                        aluno_novo = br.readLine().split(";");
+                        alno = br.readLine();
+
                     }
                     service.atualizarLista(lista);
                 } else {
-                    throw new RuntimeException();
+                    throw new RuntimeException("Primeira linha errada");
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro na leitura \n Verifique o arquivo");
+                System.out.println("Erro:" + e.getMessage());
+                e.printStackTrace();
+
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        File path = new File("Template.csv");
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
+            bw.write("Nome,Data de Nascimento,Idade,Nome dp Responsavel,Telefone,Email,Endereço,Bairro,Cep,Escola,Tamanho Roupa,Tamanho Calçado,Categoria,Faixa,Grau,Peso,Medicamento Continuo,Observação,Autorização Treino,Autorização Competição,Autorização de Imagem");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,7 +266,9 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField textFile;
     // End of variables declaration//GEN-END:variables
 }

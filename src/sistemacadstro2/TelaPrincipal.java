@@ -302,7 +302,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        AdcionarPorExcel ape = new AdcionarPorExcel();
+        AdcionarPorExcel ape = new AdcionarPorExcel(service);
         ape.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 

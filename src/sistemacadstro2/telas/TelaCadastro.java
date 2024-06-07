@@ -371,7 +371,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         lista = service.read();
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Integer id;
-        if (lista.size() == 0) {
+        if (lista.size() == 0 || lista == null) {
             id = 1;
         } else {
             Aluno referencia = (Aluno) lista.getLast();
