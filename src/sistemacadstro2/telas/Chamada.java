@@ -4,6 +4,7 @@
  */
 package sistemacadstro2.telas;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -27,10 +28,12 @@ public class Chamada extends javax.swing.JFrame {
      */
     public Chamada(ArrayList<Aluno> lista, Servico service) {
         initComponents();
+        DayOfWeek semanaDia = LocalDate.now().getDayOfWeek();
+        
         this.lista = lista;
         this.service = service;
         for (Aluno object : lista) {
-            if (object.getAtivo()) {
+            if (object.getAtivo() && object.getDiasSemana().contains(semanaDia)) {
                 String[] msg = {object.getName()};
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 model.addRow(msg);

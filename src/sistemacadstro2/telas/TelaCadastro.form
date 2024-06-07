@@ -142,13 +142,10 @@
                           <Component id="jLabel16" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="textCategoria" pref="218" max="32767" attributes="0"/>
-                              <Component id="textFaixa" max="32767" attributes="0"/>
-                              <Component id="textGrau" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="jButton1" min="-2" pref="136" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="textCategoria" pref="218" max="32767" attributes="0"/>
+                          <Component id="textFaixa" max="32767" attributes="0"/>
+                          <Component id="textGrau" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -177,6 +174,32 @@
                       <EmptySpace pref="31" max="32767" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+              <Component id="jButton1" min="-2" pref="136" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="segunda" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="terca" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="quarta" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                      <Component id="quinta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="sexta" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -288,12 +311,26 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
                   <Component id="checkImagem" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="48" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jButton1" min="-2" pref="48" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="segunda" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="terca" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="quarta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="quinta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sexta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -465,6 +502,36 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textCategoria">
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="segunda">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Segunda"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel21">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dias de Treino"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="terca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ter&#xe7;a"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="quarta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Quarta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="quinta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Quinta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="sexta">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Sexta"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

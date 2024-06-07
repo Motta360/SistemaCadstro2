@@ -4,7 +4,9 @@
  */
 package sistemacadstro2.telas;
 
+import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import sistemacadstro2.entities.Aluno;
 import sistemacadstro2.services.Servico;
 
@@ -20,7 +22,6 @@ public class DetalhesAluno extends javax.swing.JFrame {
     /**
      * Creates new form DetalhesAluno
      */
-
     public String verificarPermissao(boolean x) {
         if (x) {
             return "Sim";
@@ -33,6 +34,24 @@ public class DetalhesAluno extends javax.swing.JFrame {
         initComponents();
         this.aluno = aluno;
         this.service = service;
+
+        ArrayList<String> diasS = new ArrayList<>();
+        ArrayList<DayOfWeek> doAluno = aluno.getDiasSemana();
+        if (doAluno.contains(DayOfWeek.MONDAY)) {
+            diasS.add("Segunda");
+        }
+        if (doAluno.contains(DayOfWeek.TUESDAY)) {
+            diasS.add("Terça");
+        }
+        if (doAluno.contains(DayOfWeek.WEDNESDAY)) {
+            diasS.add("Quarta");
+        }
+        if (doAluno.contains(DayOfWeek.THURSDAY)) {
+            diasS.add("Quinta");
+        }
+        if (doAluno.contains(DayOfWeek.FRIDAY)) {
+            diasS.add("Sexta");
+        }
 
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM");
         nome.setText(aluno.getName());
@@ -54,13 +73,13 @@ public class DetalhesAluno extends javax.swing.JFrame {
         categora.setText(aluno.getCategoria());
         grau.setText(String.valueOf(aluno.getGrau()));
         faixa.setText(aluno.getFaixa());
+        dias.setText(diasS.toString());
         
         ativo.setText(verificarPermissao(aluno.getAtivo()));
         treinar.setText(verificarPermissao(aluno.getAutorizacao_treino()));
         competir.setText(verificarPermissao(aluno.getAutorizacao_competicao()));
         imagear.setText(verificarPermissao(aluno.getAutorizacao_imagem()));
-        
-        
+
     }
 
     public DetalhesAluno() {
@@ -125,6 +144,8 @@ public class DetalhesAluno extends javax.swing.JFrame {
         ativo = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        dias = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -284,21 +305,41 @@ public class DetalhesAluno extends javax.swing.JFrame {
             }
         });
 
+        dias.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        dias.setText("Dias que Treina:");
+
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel29.setText("Dias que Treina:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(298, 298, 298)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imagear)
+                        .addGap(732, 732, 732))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(competir)
+                        .addGap(134, 134, 134)
+                        .addComponent(dias, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(escola)
-                                    .addComponent(observacao)
-                                    .addComponent(medicamento))
+                                    .addComponent(observacao))
                                 .addGap(56, 56, 56)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -355,17 +396,9 @@ public class DetalhesAluno extends javax.swing.JFrame {
                             .addComponent(categora, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(298, 298, 298)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel26)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(competir))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(imagear)))))
-                .addContainerGap(322, Short.MAX_VALUE))
+                        .addComponent(medicamento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(256, 256, 256))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -427,6 +460,11 @@ public class DetalhesAluno extends javax.swing.JFrame {
                     .addGap(299, 299, 299)
                     .addComponent(jLabel25)
                     .addContainerGap(801, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(698, Short.MAX_VALUE)
+                    .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(414, 414, 414)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,7 +546,8 @@ public class DetalhesAluno extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel26)
-                                    .addComponent(competir))
+                                    .addComponent(competir)
+                                    .addComponent(dias))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -560,6 +599,11 @@ public class DetalhesAluno extends javax.swing.JFrame {
                     .addContainerGap(493, Short.MAX_VALUE)
                     .addComponent(jLabel25)
                     .addGap(193, 193, 193)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(527, Short.MAX_VALUE)
+                    .addComponent(jLabel29)
+                    .addGap(159, 159, 159)))
         );
 
         pack();
@@ -624,6 +668,7 @@ public class DetalhesAluno extends javax.swing.JFrame {
     private javax.swing.JLabel calcado;
     private javax.swing.JLabel categora;
     private javax.swing.JLabel competir;
+    private javax.swing.JLabel dias;
     private javax.swing.JLabel email;
     private javax.swing.JLabel endereco;
     private javax.swing.JLabel escola;
@@ -653,6 +698,7 @@ public class DetalhesAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;

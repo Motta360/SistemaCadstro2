@@ -4,11 +4,13 @@
  */
 package sistemacadstro2.telas;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 import sistemacadstro2.entities.Aluno;
 import sistemacadstro2.services.Servico;
@@ -30,6 +32,12 @@ public class TelaCadastro extends javax.swing.JFrame {
         this.service = service;
         textGrau.setText("0");
         textPeso.setText("0");
+
+        segunda.setSelected(true);
+        terca.setSelected(true);
+        quarta.setSelected(true);
+        quinta.setSelected(true);
+        sexta.setSelected(true);
     }
 
     private TelaCadastro() {
@@ -96,6 +104,12 @@ public class TelaCadastro extends javax.swing.JFrame {
         checkImagem = new javax.swing.JCheckBox();
         jLabel20 = new javax.swing.JLabel();
         textCategoria = new javax.swing.JTextField();
+        segunda = new javax.swing.JCheckBox();
+        jLabel21 = new javax.swing.JLabel();
+        terca = new javax.swing.JCheckBox();
+        quarta = new javax.swing.JCheckBox();
+        quinta = new javax.swing.JCheckBox();
+        sexta = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -153,6 +167,18 @@ public class TelaCadastro extends javax.swing.JFrame {
         jLabel25.setText("Autorização de Imagem");
 
         jLabel20.setText("Categoria");
+
+        segunda.setText("Segunda");
+
+        jLabel21.setText("Dias de Treino");
+
+        terca.setText("Terça");
+
+        quarta.setText("Quarta");
+
+        quinta.setText("Quinta");
+
+        sexta.setText("Sexta");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -246,12 +272,10 @@ public class TelaCadastro extends javax.swing.JFrame {
                             .addComponent(jLabel20)
                             .addComponent(jLabel16))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(textCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                                .addComponent(textFaixa)
-                                .addComponent(textGrau))
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                            .addComponent(textFaixa)
+                            .addComponent(textGrau))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -271,6 +295,26 @@ public class TelaCadastro extends javax.swing.JFrame {
                                     .addComponent(checkCompetir)
                                     .addComponent(checkImagem))))
                         .addContainerGap(31, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel21)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(segunda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(terca)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(quarta))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(quinta)
+                        .addGap(18, 18, 18)
+                        .addComponent(sexta)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,11 +400,22 @@ public class TelaCadastro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel25)
-                    .addComponent(checkImagem)
+                    .addComponent(checkImagem))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(segunda)
+                            .addComponent(terca)
+                            .addComponent(quarta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(quinta)
+                            .addComponent(sexta))))
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -382,18 +437,35 @@ public class TelaCadastro extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Digite um Nome e uma data de Nascimento: ");
         } else if (textPeso.getText().equals("")) {
             JOptionPane.showConfirmDialog(null, "O campo peso não pode estar vazio");
-        } else if(textGrau.getText().equals("")){
+        } else if (textGrau.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo Grau não pode esta vazio");
         } else {
+            ArrayList<DayOfWeek> allDays = new ArrayList<>();
 
-            Aluno a1 = new Aluno(textName.getText(), id, verificarTextoVazio(textTelefone.getText()), Double.parseDouble(textPeso.getText()), LocalDate.parse(textData.getText(), fmt), verificarTextoVazio(textResponsavel.getText()), verificarTextoVazio(textEmail.getText()), verificarTextoVazio(textEndereco.getText()), verificarTextoVazio(textBairro.getText()), verificarTextoVazio(textCep.getText()), verificarTextoVazio(textEscola.getText()), verificarTextoVazio(textRoupa.getText()), verificarTextoVazio(textCalcado.getText()), verificarTextoVazio(textCategoria.getText()), verificarTextoVazio(textFaixa.getText()), Integer.parseInt(textGrau.getText()), verificarTextoVazio(textMedicamento.getText()), verificarTextoVazio(textObservacao.getText()), checkTreinar.isSelected(), checkCompetir.isSelected(), checkImagem.isSelected());
+            allDays = new ArrayList<>();
+            if (segunda.isSelected()) {
+                allDays.add(DayOfWeek.MONDAY);
+            }
+            if (terca.isSelected()) {
+                allDays.add(DayOfWeek.TUESDAY);
+            }
+            if (quarta.isSelected()) {
+                allDays.add(DayOfWeek.WEDNESDAY);
+            }
+            if (quinta.isSelected()) {
+                allDays.add(DayOfWeek.THURSDAY);
+            }
+            if (sexta.isSelected()) {
+                allDays.add(DayOfWeek.FRIDAY);
+            }
+
+            Aluno a1 = new Aluno(textName.getText(), id, verificarTextoVazio(textTelefone.getText()), Double.parseDouble(textPeso.getText()), LocalDate.parse(textData.getText(), fmt), verificarTextoVazio(textResponsavel.getText()), verificarTextoVazio(textEmail.getText()), verificarTextoVazio(textEndereco.getText()), verificarTextoVazio(textBairro.getText()), verificarTextoVazio(textCep.getText()), verificarTextoVazio(textEscola.getText()), verificarTextoVazio(textRoupa.getText()), verificarTextoVazio(textCalcado.getText()), verificarTextoVazio(textCategoria.getText()), verificarTextoVazio(textFaixa.getText()), Integer.parseInt(textGrau.getText()), verificarTextoVazio(textMedicamento.getText()), verificarTextoVazio(textObservacao.getText()), checkTreinar.isSelected(), checkCompetir.isSelected(), checkImagem.isSelected(), allDays);
             lista.add(a1);
             textName.setText("");
             textTelefone.setText("");
             textData.setText("");
             service.atualizarLista(lista);
-            
-            
+
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -451,6 +523,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
@@ -460,6 +533,11 @@ public class TelaCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JCheckBox quarta;
+    private javax.swing.JCheckBox quinta;
+    private javax.swing.JCheckBox segunda;
+    private javax.swing.JCheckBox sexta;
+    private javax.swing.JCheckBox terca;
     private javax.swing.JTextField textBairro;
     private javax.swing.JTextField textCalcado;
     private javax.swing.JTextField textCategoria;

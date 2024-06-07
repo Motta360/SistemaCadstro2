@@ -5,6 +5,7 @@
 package sistemacadstro2.entities;
 
 import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -41,11 +42,11 @@ public class Aluno implements Serializable, Comparable<Aluno> {
     private Boolean autorizacao_competicao;
     private Boolean autorizacao_imagem;
     private Boolean ativo = true;
-
+    private ArrayList<DayOfWeek> diasSemana;
     public Aluno() {
     }
 
-    public Aluno(String name, Integer id, String num_contato, Double peso, LocalDate aniversario, String nome_responsavel, String email, String endereco, String bairro, String cep, String escola, String tamanho_roupa, String tamanho_calcado, String categoria, String faixa, Integer grau, String medicamento_cotinuo, String observacao, Boolean autorizacao_treino, Boolean autorizacao_competicao, Boolean autorizacao_imagem) {
+    public Aluno(String name, Integer id, String num_contato, Double peso, LocalDate aniversario, String nome_responsavel, String email, String endereco, String bairro, String cep, String escola, String tamanho_roupa, String tamanho_calcado, String categoria, String faixa, Integer grau, String medicamento_cotinuo, String observacao, Boolean autorizacao_treino, Boolean autorizacao_competicao, Boolean autorizacao_imagem,ArrayList<DayOfWeek> diaSemana) {
         this.name = name;
         this.id = id;
         this.num_contato = num_contato;
@@ -67,6 +68,7 @@ public class Aluno implements Serializable, Comparable<Aluno> {
         this.autorizacao_treino = autorizacao_treino;
         this.autorizacao_competicao = autorizacao_competicao;
         this.autorizacao_imagem = autorizacao_imagem;
+        this.diasSemana = diaSemana;
     }
 
     public String getName() {
@@ -125,6 +127,10 @@ public class Aluno implements Serializable, Comparable<Aluno> {
         return nome_responsavel;
     }
 
+    public ArrayList<DayOfWeek> getDiasSemana() {
+        return diasSemana;
+    }
+    
     public void setNome_responsavel(String nome_responsavel) {
         this.nome_responsavel = nome_responsavel;
     }
@@ -181,6 +187,10 @@ public class Aluno implements Serializable, Comparable<Aluno> {
         return tamanho_calcado;
     }
 
+    public void setDiasSemana(ArrayList<DayOfWeek> diasSemana) {
+        this.diasSemana = diasSemana;
+    }
+    
     public void setTamanho_calcado(String tamanho_calcado) {
         this.tamanho_calcado = tamanho_calcado;
     }

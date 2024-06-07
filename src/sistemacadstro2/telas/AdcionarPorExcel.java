@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -204,6 +205,8 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
         } else {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 lista = service.read();
+                ArrayList<DayOfWeek> allDays = new ArrayList<>();
+                allDays.addAll(Arrays.asList(DayOfWeek.FRIDAY,DayOfWeek.MONDAY,DayOfWeek.THURSDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY));
                 String primeiralinha = br.readLine();
                 if (primeiralinha.equalsIgnoreCase("Nome,Data de Nascimento,Idade,Nome dp Responsavel,Telefone,Email,Endereço,Bairro,Cep,Escola,Tamanho Roupa,Tamanho Calçado,Categoria,Faixa,Grau,Peso,Medicamento Continuo,Observação,Autorização Treino,Autorização Competição,Autorização de Imagem")) {
                     String alno = br.readLine();
@@ -215,7 +218,7 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
                         } else {
                             id = lista.getLast().getId() + 1;
                         }
-                        Aluno novo = new Aluno(verificarTextoVazio(aluno_novo[0]), id, verificarTextoVazio(aluno_novo[4]), verificarTextoVazioNum(aluno_novo[15]), verificarTextoVazioData(aluno_novo[1]), verificarTextoVazio(aluno_novo[3]), verificarTextoVazio(aluno_novo[5]), verificarTextoVazio(aluno_novo[6]), verificarTextoVazio(aluno_novo[7]), verificarTextoVazio(aluno_novo[8]), verificarTextoVazio(aluno_novo[9]), verificarTextoVazio(aluno_novo[10]), verificarTextoVazio(aluno_novo[11]), verificarTextoVazio(aluno_novo[12]), verificarTextoVazio(aluno_novo[13]), (int) verificarTextoVazioNum(aluno_novo[14]), verificarTextoVazio(aluno_novo[16]), verificarTextoVazio(aluno_novo[17]), verificaAutorizacao(aluno_novo[18]), verificaAutorizacao(aluno_novo[19]), verificaAutorizacao(aluno_novo[20]));
+                        Aluno novo = new Aluno(verificarTextoVazio(aluno_novo[0]), id, verificarTextoVazio(aluno_novo[4]), verificarTextoVazioNum(aluno_novo[15]), verificarTextoVazioData(aluno_novo[1]), verificarTextoVazio(aluno_novo[3]), verificarTextoVazio(aluno_novo[5]), verificarTextoVazio(aluno_novo[6]), verificarTextoVazio(aluno_novo[7]), verificarTextoVazio(aluno_novo[8]), verificarTextoVazio(aluno_novo[9]), verificarTextoVazio(aluno_novo[10]), verificarTextoVazio(aluno_novo[11]), verificarTextoVazio(aluno_novo[12]), verificarTextoVazio(aluno_novo[13]), (int) verificarTextoVazioNum(aluno_novo[14]), verificarTextoVazio(aluno_novo[16]), verificarTextoVazio(aluno_novo[17]), verificaAutorizacao(aluno_novo[18]), verificaAutorizacao(aluno_novo[19]), verificaAutorizacao(aluno_novo[20]),allDays);
                         lista.add(novo);
                         alno = br.readLine();
                     }

@@ -4,6 +4,7 @@
  */
 package sistemacadstro2.telas;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import sistemacadstro2.services.Servico;
  * @author lucas
  */
 public class AlterarDados extends javax.swing.JFrame {
+
     ArrayList<Aluno> lista;
     Aluno aluno;
     Servico service;
@@ -22,7 +24,6 @@ public class AlterarDados extends javax.swing.JFrame {
     /**
      * Creates new form DetalhesAluno
      */
-
     public String verificarPermissao(boolean x) {
         if (x) {
             return "Sim";
@@ -61,9 +62,25 @@ public class AlterarDados extends javax.swing.JFrame {
         competir.setSelected(aluno.getAutorizacao_competicao());
         imagear.setSelected(aluno.getAutorizacao_imagem());
         ativo.setSelected(aluno.getAtivo());
-        
-        
-        
+
+        ArrayList<DayOfWeek> doAluno = aluno.getDiasSemana();
+        if (doAluno.contains(DayOfWeek.MONDAY)) {
+            segunda.setSelected(true);
+          
+        }
+        if (doAluno.contains(DayOfWeek.TUESDAY)) {
+            terca.setSelected(true);
+        }
+        if (doAluno.contains(DayOfWeek.WEDNESDAY)) {
+            quarta.setSelected(true);
+        }
+        if (doAluno.contains(DayOfWeek.THURSDAY)) {
+            quinta.setSelected(true);
+        }
+        if (doAluno.contains(DayOfWeek.FRIDAY)) {
+            sexta.setSelected(true);
+        }
+
     }
 
     public AlterarDados() {
@@ -126,6 +143,12 @@ public class AlterarDados extends javax.swing.JFrame {
         ativo = new javax.swing.JCheckBox();
         peso = new javax.swing.JTextField();
         faltas = new javax.swing.JTextField();
+        segunda = new javax.swing.JCheckBox();
+        jLabel28 = new javax.swing.JLabel();
+        terca = new javax.swing.JCheckBox();
+        quarta = new javax.swing.JCheckBox();
+        quinta = new javax.swing.JCheckBox();
+        sexta = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -239,6 +262,18 @@ public class AlterarDados extends javax.swing.JFrame {
 
         faltas.setText("jTextField1");
 
+        segunda.setText("Segunda");
+
+        jLabel28.setText("Dias de Treino");
+
+        terca.setText("Terça");
+
+        quarta.setText("Quarta");
+
+        quinta.setText("Quinta");
+
+        sexta.setText("Sexta");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -319,17 +354,20 @@ public class AlterarDados extends javax.swing.JFrame {
                                             .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(medicamento, javax.swing.GroupLayout.Alignment.LEADING))
-                                        .addGap(64, 64, 64)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel25)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jLabel14)
-                                                .addComponent(bairro, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                                .addComponent(CEP)))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(treinar)
-                                        .addGap(257, 257, 257)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(64, 64, 64)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel25)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(jLabel14)
+                                                        .addComponent(bairro, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                                        .addComponent(CEP)))
+                                                .addGap(18, 18, 18)
+                                                .addComponent(treinar))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(382, 382, 382)
+                                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(236, 236, 236)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,8 +382,25 @@ public class AlterarDados extends javax.swing.JFrame {
                                                     .addComponent(jLabel24))
                                                 .addGap(18, 18, 18)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(imagear)
-                                                    .addComponent(ativo)))))))))
+                                                    .addComponent(ativo)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(imagear)
+                                                        .addGap(48, 48, 48)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                    .addComponent(jLabel28)
+                                                                    .addGroup(layout.createSequentialGroup()
+                                                                        .addComponent(segunda)
+                                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                        .addComponent(terca)))
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(quarta))
+                                                            .addGroup(layout.createSequentialGroup()
+                                                                .addGap(37, 37, 37)
+                                                                .addComponent(quinta)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(sexta))))))))))))
                     .addComponent(grau, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(289, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,9 +468,7 @@ public class AlterarDados extends javax.swing.JFrame {
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(grau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(188, 188, 188))
+                        .addGap(281, 281, 281))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -435,38 +488,55 @@ public class AlterarDados extends javax.swing.JFrame {
                                     .addComponent(bairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel14)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(CEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jLabel16)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel14)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(CEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(30, 30, 30)
+                                                .addComponent(jLabel16)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(escola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(93, 93, 93)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(jLabel18)
+                                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(8, 8, 8)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(treinar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel25)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                                                .addComponent(observacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(12, 12, 12))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(47, 47, 47)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                    .addComponent(jLabel26)
+                                                    .addComponent(competir))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel24)
+                                                    .addComponent(imagear))))
+                                        .addComponent(jLabel27))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel28)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(escola, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(93, 93, 93)
-                                        .addComponent(jLabel18)))
-                                .addGap(15, 15, 15)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(treinar, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                                .addComponent(medicamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel25)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                                        .addComponent(observacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(47, 47, 47)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jLabel26)
-                                            .addComponent(competir))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel24)
-                                            .addComponent(imagear))))
-                                .addComponent(jLabel27)))
+                                            .addComponent(segunda)
+                                            .addComponent(terca)
+                                            .addComponent(quarta))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(quinta)
+                                            .addComponent(sexta))
+                                        .addGap(21, 21, 21)))))
                         .addGap(52, 52, 52))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -532,11 +602,29 @@ public class AlterarDados extends javax.swing.JFrame {
         mudado.setAtivo(ativo.isSelected());
         mudado.setPeso(Double.parseDouble(peso.getText()));
         mudado.setFaltas(Integer.parseInt(faltas.getText()));
-        
+
+        ArrayList<DayOfWeek> allDays;
+        allDays = new ArrayList<>();
+        if (segunda.isSelected()) {
+            allDays.add(DayOfWeek.MONDAY);
+        }
+        if (terca.isSelected()) {
+            allDays.add(DayOfWeek.TUESDAY);
+        }
+        if (quarta.isSelected()) {
+            allDays.add(DayOfWeek.WEDNESDAY);
+        }
+        if (quinta.isSelected()) {
+            allDays.add(DayOfWeek.THURSDAY);
+        }
+        if (sexta.isSelected()) {
+            allDays.add(DayOfWeek.FRIDAY);
+        }
+        mudado.setDiasSemana(allDays);
         lista.set(posicao, mudado);
-        
+
         service.atualizarLista(lista);
-        
+
         this.dispose();
         DetalhesAluno da = new DetalhesAluno(mudado, service);
         da.setVisible(true);
@@ -616,6 +704,7 @@ public class AlterarDados extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -626,9 +715,14 @@ public class AlterarDados extends javax.swing.JFrame {
     private javax.swing.JTextField nome;
     private javax.swing.JTextField observacao;
     private javax.swing.JTextField peso;
+    private javax.swing.JCheckBox quarta;
+    private javax.swing.JCheckBox quinta;
     private javax.swing.JTextField responsavel;
     private javax.swing.JTextField roupa;
+    private javax.swing.JCheckBox segunda;
+    private javax.swing.JCheckBox sexta;
     private javax.swing.JTextField telefone;
+    private javax.swing.JCheckBox terca;
     private javax.swing.JCheckBox treinar;
     // End of variables declaration//GEN-END:variables
 }
