@@ -73,18 +73,17 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
     }
 
     public LocalDate verificarTextoVazioData(String string) {
-    if (string == null || string.isEmpty()) {
-        return LocalDate.of(2000, 1, 1); // Retorna uma data padrão se a string estiver vazia ou nula
-    } else {
-        try {
-            return LocalDate.parse(string, fmt); // Tenta converter a string em uma data
-        } catch (DateTimeParseException e) {
-            System.err.println("Erro ao analisar a data: " + e.getMessage());
-            return LocalDate.of(2000, 1, 1); // Retorna uma data padrão em caso de erro de análise
+        if (string == null || string.isEmpty()) {
+            return LocalDate.of(2000, 1, 1); // Retorna uma data padrão se a string estiver vazia ou nula
+        } else {
+            try {
+                return LocalDate.parse(string, fmt); // Tenta converter a string em uma data
+            } catch (DateTimeParseException e) {
+                System.err.println("Erro ao analisar a data: " + e.getMessage());
+                return LocalDate.of(2000, 1, 1); // Retorna uma data padrão em caso de erro de análise
+            }
         }
     }
-}
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,6 +100,7 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -129,6 +129,8 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
 
         jLabel2.setText("Para adicionar alunos por um arquivo, preencha o template gerado pelo botão \"Gerar Template CSV\"");
 
+        jLabel3.setText("Atenção: Todos os campos devem estar preenchidos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,7 +152,10 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -168,7 +173,9 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
                     .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,7 +208,13 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
                     String alno = br.readLine();
                     while (alno != null) {
                         String[] aluno_novo = alno.split(",");
-                        Aluno novo = new Aluno(verificarTextoVazio(aluno_novo[0]), lista.getLast().getId() + 1, verificarTextoVazio(aluno_novo[4]), verificarTextoVazioNum(aluno_novo[15]), verificarTextoVazioData(aluno_novo[1]), verificarTextoVazio(aluno_novo[3]), verificarTextoVazio(aluno_novo[5]), verificarTextoVazio(aluno_novo[6]), verificarTextoVazio(aluno_novo[7]), verificarTextoVazio(aluno_novo[8]), verificarTextoVazio(aluno_novo[9]), verificarTextoVazio(aluno_novo[10]), verificarTextoVazio(aluno_novo[11]), verificarTextoVazio(aluno_novo[12]), verificarTextoVazio(aluno_novo[13]), (int) verificarTextoVazioNum(aluno_novo[14]), verificarTextoVazio(aluno_novo[16]), verificarTextoVazio(aluno_novo[17]), verificaAutorizacao(aluno_novo[18]), verificaAutorizacao(aluno_novo[19]), verificaAutorizacao(aluno_novo[20]));
+                        Integer id;
+                        if (lista == null || lista.size() == 0) {
+                            id = 1;
+                        } else {
+                            id = lista.getLast().getId() + 1;
+                        }
+                        Aluno novo = new Aluno(verificarTextoVazio(aluno_novo[0]), id, verificarTextoVazio(aluno_novo[4]), verificarTextoVazioNum(aluno_novo[15]), verificarTextoVazioData(aluno_novo[1]), verificarTextoVazio(aluno_novo[3]), verificarTextoVazio(aluno_novo[5]), verificarTextoVazio(aluno_novo[6]), verificarTextoVazio(aluno_novo[7]), verificarTextoVazio(aluno_novo[8]), verificarTextoVazio(aluno_novo[9]), verificarTextoVazio(aluno_novo[10]), verificarTextoVazio(aluno_novo[11]), verificarTextoVazio(aluno_novo[12]), verificarTextoVazio(aluno_novo[13]), (int) verificarTextoVazioNum(aluno_novo[14]), verificarTextoVazio(aluno_novo[16]), verificarTextoVazio(aluno_novo[17]), verificaAutorizacao(aluno_novo[18]), verificaAutorizacao(aluno_novo[19]), verificaAutorizacao(aluno_novo[20]));
                         lista.add(novo);
                         alno = br.readLine();
 
@@ -269,6 +282,7 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField textFile;
     // End of variables declaration//GEN-END:variables
 }

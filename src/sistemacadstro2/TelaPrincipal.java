@@ -45,6 +45,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         @Override
         public void run() {
+            service.read();
             if (ordemAlfabetica) {
                 List<Aluno> ordenada = lista.stream().sorted().collect(Collectors.toList());
                 String msg = "";

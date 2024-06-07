@@ -381,7 +381,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         if (textName.getText().equals("") || textData.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite um Nome e uma data de Nascimento: ");
         } else if (textPeso.getText().equals("")) {
-            JOptionPane.showConfirmDialog(null, "Peso não pode estar vazio");
+            JOptionPane.showConfirmDialog(null, "O campo peso não pode estar vazio");
         } else if(textGrau.getText().equals("")){
             JOptionPane.showMessageDialog(null, "O campo Grau não pode esta vazio");
         } else {
@@ -392,6 +392,9 @@ public class TelaCadastro extends javax.swing.JFrame {
             textTelefone.setText("");
             textData.setText("");
             service.atualizarLista(lista);
+            
+            
+            this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
