@@ -113,6 +113,8 @@ public class DiaEspecífico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
         LocalDate dataEspecifica = LocalDate.parse(data.getText(), fmt);
         lista = service.read();
         ArrayList<String> tabela = new ArrayList<>();
@@ -126,11 +128,11 @@ public class DiaEspecífico extends javax.swing.JFrame {
             }
 
         }
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        
         List<String> ordenada = tabela.stream().sorted().collect(Collectors.toList());
-        for (String string : ordenada) {
-            String[] nomeado = {string};
-            model.addRow(nomeado);
+        for (int i = 0; i < ordenada.size(); i++) {
+            String[] nomeada = {ordenada.get(i)};
+            model.addRow(nomeada);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

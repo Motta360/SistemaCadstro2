@@ -156,7 +156,7 @@ public class Chamada extends javax.swing.JFrame {
 
         service.atualizarLista(lista);
 
-        this.setVisible(false);
+        this.dispose();
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

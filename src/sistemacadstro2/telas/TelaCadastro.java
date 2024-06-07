@@ -29,6 +29,7 @@ public class TelaCadastro extends javax.swing.JFrame {
         initComponents();
         this.service = service;
         textGrau.setText("0");
+        textPeso.setText("0");
     }
 
     private TelaCadastro() {
@@ -42,8 +43,6 @@ public class TelaCadastro extends javax.swing.JFrame {
             return string;
         }
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -378,15 +377,19 @@ public class TelaCadastro extends javax.swing.JFrame {
             Aluno referencia = (Aluno) lista.getLast();
             id = referencia.getId() + 1;
         }
+
         if (textName.getText().equals("") || textData.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Digite um Nome e uma data de Nascimento: ");
+        } else if (textPeso.getText().equals("")) {
+            JOptionPane.showConfirmDialog(null, "Peso não pode estar vazio");
+        } else if(textGrau.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "O campo Grau não pode esta vazio");
         } else {
 
-            Aluno a1 = new Aluno(textName.getText(), id, verificarTextoVazio(textTelefone.getText()), Double.parseDouble(verificarTextoVazio(textPeso.getText())), LocalDate.parse(textData.getText(), fmt), verificarTextoVazio(textResponsavel.getText()), verificarTextoVazio(textEmail.getText()), verificarTextoVazio(textEndereco.getText()), verificarTextoVazio(textBairro.getText()), verificarTextoVazio(textCep.getText()), verificarTextoVazio(textEscola.getText()), verificarTextoVazio(textRoupa.getText()), verificarTextoVazio(textCalcado.getText()), verificarTextoVazio(textCategoria.getText()), verificarTextoVazio(textFaixa.getText()), Integer.parseInt(textGrau.getText()), verificarTextoVazio(textMedicamento.getText()), verificarTextoVazio(textObservacao.getText()), checkTreinar.isSelected(), checkCompetir.isSelected(), checkImagem.isSelected());
+            Aluno a1 = new Aluno(textName.getText(), id, verificarTextoVazio(textTelefone.getText()), Double.parseDouble(textPeso.getText()), LocalDate.parse(textData.getText(), fmt), verificarTextoVazio(textResponsavel.getText()), verificarTextoVazio(textEmail.getText()), verificarTextoVazio(textEndereco.getText()), verificarTextoVazio(textBairro.getText()), verificarTextoVazio(textCep.getText()), verificarTextoVazio(textEscola.getText()), verificarTextoVazio(textRoupa.getText()), verificarTextoVazio(textCalcado.getText()), verificarTextoVazio(textCategoria.getText()), verificarTextoVazio(textFaixa.getText()), Integer.parseInt(textGrau.getText()), verificarTextoVazio(textMedicamento.getText()), verificarTextoVazio(textObservacao.getText()), checkTreinar.isSelected(), checkCompetir.isSelected(), checkImagem.isSelected());
             lista.add(a1);
             textName.setText("");
             textTelefone.setText("");
-            textPeso.setText("");
             textData.setText("");
             service.atualizarLista(lista);
         }

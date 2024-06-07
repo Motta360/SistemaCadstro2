@@ -537,7 +537,7 @@ public class AlterarDados extends javax.swing.JFrame {
         
         service.atualizarLista(lista);
         
-        this.setVisible(false);
+        this.dispose();
         DetalhesAluno da = new DetalhesAluno(mudado, service);
         da.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
