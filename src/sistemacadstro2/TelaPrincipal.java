@@ -61,7 +61,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
                 areaDeTexto.setText(msg);
             }
-            System.out.println(lista);
+
         }
 
     }
