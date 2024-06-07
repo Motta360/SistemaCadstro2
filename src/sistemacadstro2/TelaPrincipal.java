@@ -45,7 +45,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         @Override
         public void run() {
-            service.read();
+            lista = service.read();
             if (ordemAlfabetica) {
                 List<Aluno> ordenada = lista.stream().sorted().collect(Collectors.toList());
                 String msg = "";
@@ -61,6 +61,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
                 areaDeTexto.setText(msg);
             }
+            System.out.println(lista);
         }
 
     }
@@ -303,7 +304,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        AdcionarPorExcel ape = new AdcionarPorExcel(service);
+        AdcionarPorExcel ape = new AdcionarPorExcel(service,lista);
         ape.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 

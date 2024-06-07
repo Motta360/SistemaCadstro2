@@ -34,9 +34,10 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
     /**
      * Creates new form AdcionarPorExcel
      */
-    public AdcionarPorExcel(Servico service) {
+    public AdcionarPorExcel(Servico service,ArrayList<Aluno> lista) {
         initComponents();
         this.service = service;
+        this.lista = lista;
     }
 
     public AdcionarPorExcel() {
@@ -164,9 +165,9 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(textFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -217,7 +218,6 @@ public class AdcionarPorExcel extends javax.swing.JFrame {
                         Aluno novo = new Aluno(verificarTextoVazio(aluno_novo[0]), id, verificarTextoVazio(aluno_novo[4]), verificarTextoVazioNum(aluno_novo[15]), verificarTextoVazioData(aluno_novo[1]), verificarTextoVazio(aluno_novo[3]), verificarTextoVazio(aluno_novo[5]), verificarTextoVazio(aluno_novo[6]), verificarTextoVazio(aluno_novo[7]), verificarTextoVazio(aluno_novo[8]), verificarTextoVazio(aluno_novo[9]), verificarTextoVazio(aluno_novo[10]), verificarTextoVazio(aluno_novo[11]), verificarTextoVazio(aluno_novo[12]), verificarTextoVazio(aluno_novo[13]), (int) verificarTextoVazioNum(aluno_novo[14]), verificarTextoVazio(aluno_novo[16]), verificarTextoVazio(aluno_novo[17]), verificaAutorizacao(aluno_novo[18]), verificaAutorizacao(aluno_novo[19]), verificaAutorizacao(aluno_novo[20]));
                         lista.add(novo);
                         alno = br.readLine();
-
                     }
                     service.atualizarLista(lista);
                 } else {
