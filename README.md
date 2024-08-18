@@ -5,7 +5,7 @@ Este é o projeto de um sistema de controle de Cadastro criado para o Instituto 
 https://www.instagram.com/shemuelinstituto/?locale=zh-TW&hl=am-et
 
 ## Página Inicial
-![Web 1](https://github.com/Motta360/SistemaCadastro/blob/main/Images/print.png)
+![Web 1](https://github.com/Motta360/SistemaCadstro2/blob/main/Images/print.png)
 
 # Tecnologias utilizadas
 ## Front end
